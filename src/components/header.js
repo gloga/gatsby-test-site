@@ -2,16 +2,27 @@ import React from 'react';
 import { Link } from 'gatsby';
 
 import headerStyles from './../styles/header.module.css';
+import MainMenu from './../queries/main-menu';
+
 
 export default () => {
+  const {
+    nodes: menu 
+  } = MainMenu();
+ 
   return (
     <header className={headerStyles.header}>
-      <div className={headerStyles.headerItem}>
-        <Link to='/' className={headerStyles.headerLink}>Home</Link>
-      </div>
-      <div className={headerStyles.headerItem}>
-        <Link to='/about' className={headerStyles.headerLink}>About</Link>
-      </div>
+      {
+        menu.map(({ label, url, menuItemId}) => {
+          const {pathname: slug} = new URL(url);
+          return (
+            <div className={headerStyles.headerItem} key={menuItemId}>
+              <Link to={slug} className={headerStyles.headerLink}>{label}</Link>
+            </div>
+          )
+        })
+      }
+      
     </header>
   );
 }

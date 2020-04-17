@@ -1,16 +1,15 @@
 import React from "react";
-import { graphql } from "gatsby";
 
 import Header from './../components/header';
 import Title from './../components/title';
 import Container from './../components/container';
 
-export default ({ data }) => {
+export default () => {
   
   return (
     <>
       <Header/>
-      <Title content={data.site.siteMetadata.title}/>
+      <Title content='Title'/>
       <Container>
         <h1>Hi! I'm building a fake Gatsby site as part of a tutorial!</h1>
         <p>
@@ -21,13 +20,3 @@ export default ({ data }) => {
     </>
   );
 }
-
-export const query = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`;
