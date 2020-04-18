@@ -1,11 +1,5 @@
-body,
-html {
-    margin: 0;
-    padding: 0;
-}
+@import '~@wordpress/block-library/build-style/style.css';
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+body {
+    font-family: Arial, Helvetica, sans-serif;
 }
