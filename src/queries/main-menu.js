@@ -1,26 +1,30 @@
 import { useStaticQuery, graphql } from "gatsby"
 
 export default () => {
-  const { 
-    wp: { 
-      menu: { 
-        menuItems
-      } 
-    } 
+  const {
+    wp: {
+      menus: {
+        nodes
+      }
+    }
   } = useStaticQuery(graphql`
     {
       wp {
-        menu(id: "TWVudToxOTM") {
-          menuItems {
-            nodes {
-              url
-              label
-              menuItemId
+        menus(first: 200) {
+          nodes {
+            id
+            menuItems {
+              nodes {
+                url
+                label
+                menuItemId
+              }
             }
           }
         }
       }
     }
   `)
-  return menuItems;
+
+  return nodes.filter(node => node.id === process.env.GATSBY_MAIN_MENU_ID)[0];
 }

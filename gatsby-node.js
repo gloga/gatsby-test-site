@@ -18,8 +18,8 @@ exports.createPages = async ({ graphql, actions }) => {
         }
     `
     )
-  
-    result.data.wp.pages.nodes.forEach((node) => {        
+
+    result.data.wp.pages.nodes.forEach((node) => {
         createPage({
             path: node.slug,
             component: path.resolve(`./src/templates/page.js`),

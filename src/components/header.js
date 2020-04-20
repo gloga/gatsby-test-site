@@ -6,14 +6,12 @@ import MainMenu from './../queries/main-menu';
 
 
 export default () => {
-  const {
-    nodes: menu 
-  } = MainMenu();
- 
+  const { menuItems: { nodes: mainMenu } } = MainMenu();
+
   return (
     <header className={headerStyles.header}>
       {
-        menu.map(({ label, url, menuItemId}) => {
+        mainMenu.map(({label, url, menuItemId}) => {
           const {pathname: slug} = new URL(url);
           return (
             <div className={headerStyles.headerItem} key={menuItemId}>
@@ -22,7 +20,7 @@ export default () => {
           )
         })
       }
-      
+
     </header>
   );
 }

@@ -7,13 +7,13 @@ import Container from './../components/container';
 
 export default ({data}) => {
     const { wp: { page: pageData } } = data;
-    
+
     return (
         <>
             <Header />
             <Title content={pageData.title}/>
             <Container>
-                <div dangerouslySetInnerHTML={{ __html: pageData.content }} /> 
+                <div dangerouslySetInnerHTML={{ __html: pageData.content }} />
             </Container>
         </>
     );
@@ -25,7 +25,6 @@ export const pageQuery = graphql`
       page(id: $id) {
         slug
         title
-        excerpt
         content
         id
       }

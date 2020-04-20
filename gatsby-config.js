@@ -3,6 +3,9 @@
  *
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
+require("dotenv").config({
+  path: `.env`,
+})
 
 module.exports = {
   /* Your site config here */
@@ -12,8 +15,6 @@ module.exports = {
     author: `gatsbyjs`,
   },
   plugins: [
-    `gatsby-plugin-sass`,
-    `gatsby-plugin-emotion`,
     {
       resolve: "gatsby-source-graphql",
       options: {
@@ -22,8 +23,31 @@ module.exports = {
         // Field under which the remote schema will be accessible. You'll use this in your Gatsby query
         fieldName: "wp",
         // Url to query from
-        url: "http://gatsby-wp.test/graphql",
+        url: process.env.API_URL,
       },
+    },
+    {
+      resolve: "gatsby-source-wordpress",
+      options: {
+        baseUrl: process.env.API_URL_2,
+        protocol: "http",
+        restApiRoutePrefix: "wp-json",
+        hostingWPCOM: false,
+        useACF: false,
+
+        verboseOutput: true,
+        keepMediaSizes: true,
+
+        includedRoutes: [
+          "**/posts",
+          "**/pages",
+          "**/media",
+          "**/categories",
+          "**/taxonomies",
+          "**/projects",
+          "**/resources",
+        ],
+      }
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -39,5 +63,7 @@ module.exports = {
         icon: `src/images/icon.png`, // This path is relative to the root of the site.
       },
     },
+    `gatsby-plugin-sass`,
+    `gatsby-plugin-emotion`,
   ]
 }
